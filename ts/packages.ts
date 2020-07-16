@@ -3,7 +3,6 @@ declare var Fuse: any;
 let allPackages,
     currentPackages,
     cancellationToken,
-    hiddenCount: number,
     selectedPackage;
 const triples = [
     'arm-uwp',
@@ -130,10 +129,8 @@ var renderCompability = function (pkg, packageDiv) {
             simplifiedStatus === 'fail' &&
             compatFilter.indexOf(t) !== -1
         ) {
-            if (!packageDiv.classList.contains('hide')) {
-                packageDiv.classList.add('hide');
-                hiddenCount += 1;
-            }
+            
+            packageDiv.classList.add('hide');
         }
         var procStatusFrag = document.createDocumentFragment();
         var procStatusIconDiv = iconDiv.cloneNode(true);
@@ -288,10 +285,7 @@ function renderCard(package, mainDiv, oldCancellationToken) {
     )
         return; //don't render old packages
 
-    console.log('loading packages');
-    var totalPackags = document.getElementsByClassName('total-packages')[0];
-    totalPackags.textContent =
-        'Total: ' + (currentPackages.length - hiddenCount) + ' Packages';
+    
 
     // Div for each package
     var packageDiv = parentPackageDiv.cloneNode(true);
@@ -314,7 +308,6 @@ function renderCard(package, mainDiv, oldCancellationToken) {
 var renderPackages = function () {
     cancellationToken = new Object();
     clearPackages();
-    hiddenCount = 0;
     // Parent div to hold all the package cards
     var mainDiv = document.getElementsByClassName('package-results')[0];
     if (currentPackages.length > 0) {
@@ -330,6 +323,7 @@ var renderPackages = function () {
         noResultDiv.innerHTML = 'No results for ' + '<b>' + query + '</b>';
         mainDiv.appendChild(noResultDiv);
     }
+    loadTotalPackages();
 };
 
 function clearPackages() {
@@ -337,6 +331,8 @@ function clearPackages() {
     while (mainDiv.firstChild) {
         mainDiv.removeChild(mainDiv.firstChild);
     }
+    let totalPackages : Element = document.getElementsByClassName('total-packages')[0];
+    totalPackages.textContent = '';
 }
 
 function searchPackages(query) {
@@ -465,4 +461,24 @@ function clickInstallTab(platform) {
             console.log('Error: unexpected platform', platform);
     }
     installCode.setAttribute('readonly', 'true');
+}
+
+function loadTotalPackages() {
+    let totalPackages : Element = document.getElementsByClassName('total-packages')[0];
+    let hiddenPackages = new Set()
+    for (var i = 0; i < currentPackages.length; i++) {
+        for (var t of triples) {
+            var status = currentPackages[i][t];
+            var simplifiedStatus =
+                status === 'pass' || status === 'fail' ? status : 'unknown';
+            if (
+                simplifiedStatus === 'fail' &&
+                compatFilter.indexOf(t) !== -1
+            ) {
+                hiddenPackages.add(currentPackages[i])
+            }
+        }
+    }
+    totalPackages.textContent =
+        'Total: ' + (currentPackages.length - hiddenPackages.size) + ' Packages';
 }
