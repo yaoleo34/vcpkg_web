@@ -1,9 +1,6 @@
-declare var Fuse : any;
+declare var Fuse: any;
 
-let allPackages,
-    currentPackages,
-    cancellationToken,
-    selectedPackage;
+let allPackages, currentPackages, cancellationToken, selectedPackage;
 const triplets = [
     'arm-uwp',
     'arm64-windows',
@@ -129,7 +126,6 @@ var renderCompability = function (pkg, packageDiv) {
             simplifiedStatus === 'fail' &&
             compatFilter.indexOf(t) !== -1
         ) {
-            
             packageDiv.classList.add('hide');
         }
         var procStatusFrag = document.createDocumentFragment();
@@ -285,8 +281,6 @@ function renderCard(package, mainDiv, oldCancellationToken) {
     )
         return; //don't render old packages
 
-    
-
     // Div for each package
     var packageDiv = parentPackageDiv.cloneNode(true);
 
@@ -331,7 +325,9 @@ function clearPackages() {
     while (mainDiv.firstChild) {
         mainDiv.removeChild(mainDiv.firstChild);
     }
-    let totalPackages : Element = document.getElementsByClassName('total-packages')[0];
+    let totalPackages: Element = document.getElementsByClassName(
+        'total-packages'
+    )[0];
     totalPackages.textContent = '';
 }
 
@@ -439,7 +435,7 @@ function updateModal(pkg) {
     document.getElementById('pkg-modal-files').replaceWith(fileDiv);
 }
 
-function clickInstallTab(platform : Platform) : void {
+function clickInstallTab(platform: Platform): void {
     let installCode = document.getElementById('install-code');
     installCode.setAttribute('readonly', 'false');
     let windowsTab = document.getElementById('install-tab-windows');
@@ -463,22 +459,23 @@ function clickInstallTab(platform : Platform) : void {
     installCode.setAttribute('readonly', 'true');
 }
 
-function loadTotalPackages() : void {
-    let totalPackages : Element = document.getElementsByClassName('total-packages')[0];
-    let hiddenPackages = new Set()
+function loadTotalPackages(): void {
+    let totalPackages: Element = document.getElementsByClassName(
+        'total-packages'
+    )[0];
+    let hiddenPackages = new Set();
     for (let i = 0; i < currentPackages.length; i++) {
         for (let t of triplets) {
             let status = currentPackages[i][t];
             let simplifiedStatus =
                 status === 'pass' || status === 'fail' ? status : 'unknown';
-            if (
-                simplifiedStatus === 'fail' &&
-                compatFilter.indexOf(t) !== -1
-            ) {
-                hiddenPackages.add(currentPackages[i])
+            if (simplifiedStatus === 'fail' && compatFilter.indexOf(t) !== -1) {
+                hiddenPackages.add(currentPackages[i]);
             }
         }
     }
     totalPackages.textContent =
-        'Total: ' + (currentPackages.length - hiddenPackages.size) + ' Packages';
+        'Total: ' +
+        (currentPackages.length - hiddenPackages.size) +
+        ' Packages';
 }
