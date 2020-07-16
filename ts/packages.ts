@@ -1,4 +1,4 @@
-declare var Fuse: any;
+declare var Fuse : any;
 
 let allPackages,
     currentPackages,
