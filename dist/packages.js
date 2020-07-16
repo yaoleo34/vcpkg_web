@@ -1,5 +1,5 @@
 var allPackages, currentPackages, cancellationToken, selectedPackage;
-var triples = [
+var triplets = [
     'arm-uwp',
     'arm64-windows',
     'x64-linux',
@@ -88,8 +88,8 @@ var renderCompability = function (pkg, packageDiv) {
     var iconDiv = document.createElement('img');
     iconDiv.className = 'processor-status-icon';
     var compatRowFrag = document.createDocumentFragment();
-    for (var _i = 0, triples_1 = triples; _i < triples_1.length; _i++) {
-        var t = triples_1[_i];
+    for (var _i = 0, triplets_1 = triplets; _i < triplets_1.length; _i++) {
+        var t = triplets_1[_i];
         var procStatusDiv = statusDiv.cloneNode(true);
         var status = pkg[t];
         var simplifiedStatus = status === 'pass' || status === 'fail' ? status : 'unknown';
@@ -378,10 +378,10 @@ function loadTotalPackages() {
     var totalPackages = document.getElementsByClassName('total-packages')[0];
     var hiddenPackages = new Set();
     for (var i = 0; i < currentPackages.length; i++) {
-        for (var _i = 0, triples_2 = triples; _i < triples_2.length; _i++) {
-            var t = triples_2[_i];
-            var status = currentPackages[i][t];
-            var simplifiedStatus = status === 'pass' || status === 'fail' ? status : 'unknown';
+        for (var _i = 0, triplets_2 = triplets; _i < triplets_2.length; _i++) {
+            var t = triplets_2[_i];
+            var status_1 = currentPackages[i][t];
+            var simplifiedStatus = status_1 === 'pass' || status_1 === 'fail' ? status_1 : 'unknown';
             if (simplifiedStatus === 'fail' &&
                 compatFilter.indexOf(t) !== -1) {
                 hiddenPackages.add(currentPackages[i]);

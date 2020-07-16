@@ -4,7 +4,7 @@ let allPackages,
     currentPackages,
     cancellationToken,
     selectedPackage;
-const triples = [
+const triplets = [
     'arm-uwp',
     'arm64-windows',
     'x64-linux',
@@ -18,7 +18,7 @@ let compatFilter = [];
 
 $(document).ready(function () {
     $('.install-tab-btn').click(function () {
-        clickInstallTab($(this).attr('id').substring(12));
+        clickInstallTab($(this).attr('id').substring(12) as Platform);
     });
 
     $('#install-copy').click(function () {
@@ -116,7 +116,7 @@ var renderCompability = function (pkg, packageDiv) {
     iconDiv.className = 'processor-status-icon';
 
     let compatRowFrag = document.createDocumentFragment();
-    for (var t of triples) {
+    for (var t of triplets) {
         var procStatusDiv = statusDiv.cloneNode(true);
         var status = pkg[t];
         var simplifiedStatus =
@@ -439,7 +439,7 @@ function updateModal(pkg) {
     document.getElementById('pkg-modal-files').replaceWith(fileDiv);
 }
 
-function clickInstallTab(platform) {
+function clickInstallTab(platform : Platform) : void {
     let installCode = document.getElementById('install-code');
     installCode.setAttribute('readonly', 'false');
     let windowsTab = document.getElementById('install-tab-windows');
@@ -463,13 +463,13 @@ function clickInstallTab(platform) {
     installCode.setAttribute('readonly', 'true');
 }
 
-function loadTotalPackages() {
+function loadTotalPackages() : void {
     let totalPackages : Element = document.getElementsByClassName('total-packages')[0];
     let hiddenPackages = new Set()
-    for (var i = 0; i < currentPackages.length; i++) {
-        for (var t of triples) {
-            var status = currentPackages[i][t];
-            var simplifiedStatus =
+    for (let i = 0; i < currentPackages.length; i++) {
+        for (let t of triplets) {
+            let status = currentPackages[i][t];
+            let simplifiedStatus =
                 status === 'pass' || status === 'fail' ? status : 'unknown';
             if (
                 simplifiedStatus === 'fail' &&
