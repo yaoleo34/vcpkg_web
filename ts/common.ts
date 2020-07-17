@@ -1,4 +1,3 @@
-type Platform = 'windows' | 'unix' | 'mac' | 'linux';
 
 function copyCodePanel(id) {
     let temp: HTMLInputElement = document.getElementById(
