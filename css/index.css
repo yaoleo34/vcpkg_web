@@ -194,3 +194,7 @@ p {
 #stay-in-touch {
     margin-bottom: 5vh;
 }
+
+.hide {
+    display: none;
+}
