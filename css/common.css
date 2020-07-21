@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@500&display=swap');
+
 .tablist {
     background: #605e5c;
     border: none;
@@ -6,6 +8,7 @@
 }
 
 .tab-panel {
+    font-family: 'Inconsolata', monospace;
     background: #f1f1f2;
     width: 100%;
     padding: 10px;
