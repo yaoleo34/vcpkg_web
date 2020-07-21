@@ -67,11 +67,19 @@ header.masthead {
     margin-top: 7rem;
 }
 
-.examples {
-    font-size: 20px;
+.title {
+    display: flex;
     background-color: #4970aa;
+    min-height: 90px;
     color: white;
-    text-align: center;
+    align-items: center;
+    justify-content: center;
+}
+
+.examples {
+    color: #ffffff;
+    font-size: 20px;
+    margin-bottom: 0px;
 }
 
 .what-is {
@@ -198,4 +206,9 @@ p {
 
 .hide {
     display: none;
+}
+
+.gif {
+    max-width: 70vw;
+    height: auto;
 }
