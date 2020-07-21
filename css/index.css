@@ -64,6 +64,7 @@ header.masthead {
     text-align: center;
     padding-top: 20px;
     margin-bottom: 60px;
+    margin-top: 7rem;
 }
 
 .examples {
@@ -77,8 +78,8 @@ header.masthead {
     margin-left: 15%;
     margin-right: 15%;
     font-size: 20px;
-    padding-top: 24px;
-    padding-bottom: 96px;
+    margin-top: 3rem;
+    margin-bottom: 5rem;
 }
 
 .blank-space {
