@@ -107,5 +107,17 @@ footer p {
 }
 
 .left-marg {
-    margin-left: 1.5rem;
+    margin-left: 3rem;
+}
+
+.neg-marg {
+    margin-left: -2.5rem;
+}
+
+.right-align {
+    text-align: right;
+}
+
+.inline {
+    display: inline;
 }
