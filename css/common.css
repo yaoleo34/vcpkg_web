@@ -80,7 +80,7 @@ footer p {
 }
 
 .footer-text {
-    font-size: 18px;
+    font-size: 16px;
 }
 
 .ms-logo-footer {
@@ -89,8 +89,7 @@ footer p {
 }
 
 .no-marg {
-    margin: 0px;
-    margin-top: 16px;
+    margin-top: 18px;
 }
 
 .privacy {
@@ -107,7 +106,7 @@ footer p {
 }
 
 .left-marg {
-    margin-left: 3rem;
+    margin-left: 3vw;
 }
 
 .neg-marg {
@@ -120,4 +119,9 @@ footer p {
 
 .inline {
     display: inline;
+}
+
+.container {
+    margin-left: 0px;
+    margin-right: 0px;
 }
